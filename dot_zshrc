@@ -1,0 +1,50 @@
+autoload -U +X bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
+# aws cli auto prompt is awesome but breaks other tools that rely on aws command.
+# For example, kubectl breaks when auto prompt is enabled!
+export AWS_CLI_AUTO_PROMPT=OFF
+
+# kubectl completion
+source <(kubectl completion zsh)
+
+# pure
+fpath+=("$(brew --prefix)/share/zsh/site-functions")
+export CLICOLOR=1 # color
+autoload -U promptinit
+promptinit
+prompt pure
+
+# doom emacs
+PATH=~/.config/emacs/bin:$PATH
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# psql binary
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# direnv
+eval "$(direnv hook zsh)"
+
+# terraform alisa
+alias tf='terraform'
+
+# Go binaries
+export PATH="$HOME/go/bin:$PATH"

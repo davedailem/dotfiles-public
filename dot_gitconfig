@@ -1,0 +1,12 @@
+[commit]
+	gpgsign = true
+[user]
+  signingkey = 
+  user = 
+  email = 
+[core]
+  editor = emacs
+[credential]
+	helper = cache
+[github]
+	user = 

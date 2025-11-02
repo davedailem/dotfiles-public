@@ -1,0 +1,6 @@
+
+README.*
+.gitignore
+
+.ssh/known_hosts*
+gpg_key/
